@@ -15,7 +15,7 @@ class ImageGeneratorAIView extends StatelessWidget {
           ImageGeneratorCubit(getIt.get<ImageGeneratorRepoImpl>()),
       child: BlocBuilder<ImageGeneratorCubit, ImageGeneratorState>(
         builder: (context, state) {
-          var cubit = context.read<ImageGeneratorCubit>();
+          var cubit = BlocProvider.of<ImageGeneratorCubit>(context);
           return Scaffold(
             appBar: AppBar(
               title: const Text(
@@ -24,7 +24,7 @@ class ImageGeneratorAIView extends StatelessWidget {
               leading: cubit.imageUrl != null
                   ? IconButton(
                       onPressed: () {
-                      cubit.clearImageData();
+                        cubit.clearImageData();
                       },
                       icon: const Icon(
                         Icons.history_rounded,
@@ -44,7 +44,10 @@ class ImageGeneratorAIView extends StatelessWidget {
                     : const SizedBox.shrink(),
               ],
             ),
-            body: ImageGeneratorAIViewBody(state: state, cubit: cubit),
+            body: ImageGeneratorAIViewBody(
+              state: state,
+              cubit: cubit,
+            ),
           );
         },
       ),
