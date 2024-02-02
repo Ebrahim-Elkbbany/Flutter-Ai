@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_ai/core/network/dio.dart';
 import 'package:flutter_ai/features/Image_generator_ai/data/repos/image_generator_repo_impl.dart';
+import 'package:flutter_ai/features/chat_ai/data/repos/chat_ai_repo_impl.dart';
 import 'package:get_it/get_it.dart';
 
 final getIt = GetIt.instance;
@@ -12,6 +13,9 @@ void setupServiceLocator() {
     ),
   );
   getIt.registerSingleton<ImageGeneratorRepoImpl>(ImageGeneratorRepoImpl(
+    getIt.get<ApiService>(),
+  ));
+  getIt.registerSingleton<ChatAiRepoRepoImpl>(ChatAiRepoRepoImpl(
     getIt.get<ApiService>(),
   ));
 }

@@ -17,6 +17,7 @@ class AppTextFormField extends StatelessWidget {
   final String? Function(String?)? validator ;
   final Function()? suffixIconTap;
 
+
   const AppTextFormField({
     super.key,
     this.contentPadding,
@@ -31,6 +32,7 @@ class AppTextFormField extends StatelessWidget {
     this.controller,
      this.validator,
     this.suffixIconTap,
+
   });
 
   @override
@@ -73,11 +75,12 @@ class AppTextFormField extends StatelessWidget {
         ),
         hintStyle: hintStyle ?? FontStyles.font16WhiteGrayW400,
         hintText: hintText,
-        suffixIcon: GestureDetector(
+        suffixIcon: suffixIcon==null ? null :GestureDetector(
           onTap: suffixIconTap,
           child: Icon(
             suffixIcon,
-
+            color: AppColors.kPurpleColor,
+            size: 20.w,
           ),
         ),
         fillColor: backgroundColor ?? AppColors.kPrimaryColor,

@@ -3,10 +3,11 @@ import 'package:flutter_ai/core/theming/app_colors.dart';
 import 'package:flutter_ai/core/theming/font_styles.dart';
 import 'package:flutter_ai/core/widgets/custom_button.dart';
 import 'package:flutter_ai/core/widgets/custom_text_form_field.dart';
+import 'package:flutter_ai/core/widgets/loading_or_origin_ai_displayed.dart';
 import 'package:flutter_ai/core/widgets/responsive_spacing.dart';
 import 'package:flutter_ai/features/Image_generator_ai/presentation/manager/image_generator_cubit.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lottie/lottie.dart';
+
 
 class ImageGeneratorAIViewBody extends StatelessWidget {
   const ImageGeneratorAIViewBody(
@@ -24,9 +25,7 @@ class ImageGeneratorAIViewBody extends StatelessWidget {
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               child: cubit.imageUrl ==null
-                  ? Lottie.asset(state is ImageGeneratorLoading
-                      ? 'assets/images/loading.json'
-                      : "assets/images/ai_logo.json")
+                  ? LoadingOrOriginAiDisplayed(isLoading: state is ImageGeneratorLoading)
                   : ClipRRect(
                       borderRadius: const BorderRadius.all(Radius.circular(12)),
                       child: Image.network(
@@ -58,6 +57,7 @@ class ImageGeneratorAIViewBody extends StatelessWidget {
                     if (value!.isEmpty) {
                       return 'Please enter valid description';
                     }
+                    return null;
                   },
                   hintText: 'Write your needed here...',
                 ),
