@@ -43,12 +43,17 @@ class ImageGeneratorCubit extends Cubit<ImageGeneratorState> {
     emit(ClearImageData());
   }
 
-  void saveImage() async {
+  void saveImage(context) async {
     var response = await Dio()
         .get(imageUrl!, options: Options(responseType: ResponseType.bytes));
     final result = await ImageGallerySaver.saveImage(
       Uint8List.fromList(response.data),
       quality: 100,
+    );
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('QR Code saved to Gallery'),
+      ),
     );
     emit(InstallImage());
     if (kDebugMode) {

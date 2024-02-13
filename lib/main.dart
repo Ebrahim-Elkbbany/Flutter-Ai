@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ai/app_bloc_observer.dart';
 import 'package:flutter_ai/core/di/dependency_injection.dart';
-import 'package:flutter_ai/core/network/dio.dart';
 import 'package:flutter_ai/core/theming/app_theme.dart';
-import 'package:flutter_ai/features/layout/layout_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'features/home/presentation/view/home_view.dart';
 
 void main() async{
   setupServiceLocator();
@@ -29,7 +29,7 @@ class FlutterAiApp extends StatelessWidget {
           home: child,
         );
       },
-      child:  const LayoutView(),
+      child:  const HomeView(),
     );
   }
 }

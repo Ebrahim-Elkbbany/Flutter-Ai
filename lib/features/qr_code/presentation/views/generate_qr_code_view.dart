@@ -1,27 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ai/core/di/dependency_injection.dart';
-import 'package:flutter_ai/features/Image_generator_ai/data/repos/image_generator_repo_impl.dart';
-import 'package:flutter_ai/features/Image_generator_ai/presentation/manager/image_generator_cubit.dart';
-import 'package:flutter_ai/features/Image_generator_ai/presentation/view/widgets/image_generator_ai_view_body.dart';
+import 'package:flutter_ai/features/qr_code/presentation/manager/generate_qr_code_cubit.dart';
+import 'package:flutter_ai/features/qr_code/presentation/views/widgets/generate_qr_code_body.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ImageGeneratorAIView extends StatelessWidget {
-  const ImageGeneratorAIView({super.key});
+class GenerateQrCodeView extends StatelessWidget {
+  const GenerateQrCodeView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          ImageGeneratorCubit(getIt.get<ImageGeneratorRepoImpl>()),
-      child: BlocBuilder<ImageGeneratorCubit, ImageGeneratorState>(
+      create: (context) => GenerateQrCodeCubit(),
+      child: BlocBuilder<GenerateQrCodeCubit, GenerateQrCodeState>(
         builder: (context, state) {
-          var cubit = BlocProvider.of<ImageGeneratorCubit>(context);
+          var cubit = BlocProvider.of<GenerateQrCodeCubit>(context);
           return Scaffold(
             appBar: AppBar(
               title: const Text(
-                'Image Generator AI 🤖',
+                'Generate QR Code',
               ),
-              leading: cubit.imageUrl != null
+              leading: cubit.controller.text.isNotEmpty
                   ? IconButton(
                       onPressed: () {
                         cubit.clearImageData();
@@ -32,10 +29,10 @@ class ImageGeneratorAIView extends StatelessWidget {
                     )
                   : const SizedBox.shrink(),
               actions: [
-                cubit.imageUrl != null
+                cubit.controller.text.isNotEmpty
                     ? IconButton(
                         onPressed: () {
-                          cubit.saveImage(context);
+                          cubit.saveQRCode(context);
                         },
                         icon: const Icon(
                           Icons.download_outlined,
@@ -44,8 +41,7 @@ class ImageGeneratorAIView extends StatelessWidget {
                     : const SizedBox.shrink(),
               ],
             ),
-            body: ImageGeneratorAIViewBody(
-              state: state,
+            body: GenerateQrCodeViewBody(
               cubit: cubit,
             ),
           );

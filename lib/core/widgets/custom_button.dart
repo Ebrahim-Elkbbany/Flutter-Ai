@@ -15,7 +15,7 @@ class CustomButton extends StatelessWidget {
       this.onPressed,
        this.height,
        this.width=double.infinity,
-       this.radius, this.style,
+       this.radius, this.style, this.icon,
       })
       : super(key: key);
 
@@ -25,6 +25,7 @@ class CustomButton extends StatelessWidget {
   final double ?width;
   final double ?radius;
   final TextStyle? style;
+  final  IconData? icon;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +45,7 @@ class CustomButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
              Icon(
-              Icons.generating_tokens,
+             icon ?? Icons.generating_tokens,
               color: Colors.white,
               size: 22.w,
             ),
