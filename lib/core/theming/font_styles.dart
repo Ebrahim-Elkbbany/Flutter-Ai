@@ -17,7 +17,13 @@ class FontStyles{
   static TextStyle  font16WhiteGrayW400 =TextStyle(
     fontSize: 16.sp,
     color: const Color(0xFF9F9F9F),
-  );  static TextStyle  font18WhiteW400 =TextStyle(
+  );
+  static TextStyle  font16WhiteW400 =TextStyle(
+    fontSize: 16.sp,
+    color: Colors.white,
+  );
+
+  static TextStyle  font18WhiteW400 =TextStyle(
     fontSize: 18.sp,
     color: Colors.white,
   );
